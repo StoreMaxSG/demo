@@ -1,0 +1,18 @@
+# macOS system files
+.DS_Store
+
+# IDE files
+.vscode/
+.idea/
+
+# Build files
+build/
+dist/
+
+# Dependency directories
+node_modules/
+.env
+
+# Log files
+logs/
+*.log
