@@ -1,153 +1,48 @@
 # StoreMax
 
-<!-- portfolio-status -->
-> Built for the AgentField Hackathon. The hosted demo is no longer available; this repository contains the architecture, implementation notes, and local setup.
+A technical case study of a multi-agent warehouse optimization prototype built for the AgentField Hackathon.
 
-A modern warehouse management system designed to optimize storage, streamline operations, and enhance overall warehouse efficiency. StoreMax provides a comprehensive solution for managing warehouse operations with a focus on simplicity and functionality.
+StoreMax explored how coordinated agents could improve cargo placement, warehouse visibility, and operational handoffs.
 
-## Project Overview
+## What We Built
 
-StoreMax offers a seamless experience for warehouse management, including:
+- A warehouse manager agent that owns state and coordinates each optimization run
+- An optimizer agent that scores placements by height fit and turnover priority
+- A sync agent that records events and simulates warehouse management system exports
+- A dashboard concept for rack configuration, execution logs, and placement results
 
-- Optimized storage allocation
-- Efficient cargo handling
-- Real-time monitoring of warehouse operations
-- Streamlined workflow management
-- User-friendly interface for warehouse personnel
+## Workflow
 
-## Features
+1. Load warehouse rack, bin, and cargo definitions.
+2. Start an optimization run through the warehouse manager.
+3. Rank compatible bins using cargo height and turnover preferences.
+4. Place compatible cargo and flag items that exceed available capacity.
+5. Review the execution trail and export the resulting warehouse state.
 
-### Warehouse Optimization
+## Architecture
 
-- Intelligent storage allocation algorithms
-- Space utilization analysis
-- Cargo categorization and organization
-
-### Real-time Monitoring
-
-- Live tracking of warehouse operations
-- Agent status monitoring
-- Performance metrics and insights
-
-### User Interface
-
-- Responsive design for various devices
-- Intuitive dashboard for warehouse management
-- Real-time updates and notifications
-
-### Integration Capabilities
-
-- Modular architecture for easy integration
-- Standardized communication protocols
-- Extensible plugin system
-
-## Technologies Used
-
-### Frontend
-
-- Framework: React
-- Language: JavaScript/TypeScript
-- Build Tool: Vite
-- Styling: Tailwind CSS
-- Hosting: Cloudflare Pages
-
-### Backend
-
-- Language: Python
-- Architecture: Agent-based system
-- Platform: AgentField
-- Serverless Platform: Cloudflare Workers, Cloudflare Containers, KV, Durable Objects, R2
-- Service Bindings: Cloudflare Pages to Workers integration
-- Container Runtime: Cloudflare Containers for Python agents
-
-### Development Tools
-
-- Version Control: Git
-- Package Management: npm, pip
-- Deployment: Vite, Cloudflare Workers
-
-## Project Structure
-
-```
-opensource/
-├── README.md          # Main documentation
-├── LICENSE            # MIT License
-└── docs/              # Additional documentation
-    ├── architecture-overview.md   # System architecture
-    ├── cloudflare-workers.md      # Cloudflare Workers implementation
-    ├── agentfield-implementation.md # AgentField implementation guide
-    └── getting-started.md         # Getting started guide
+```mermaid
+flowchart TD
+    A[Warehouse dashboard] --> B[AgentField control plane]
+    B --> C[Warehouse manager]
+    B --> D[Optimizer]
+    B --> E[Sync agent]
+    C --> F[Shared warehouse state]
+    D --> G[Placement scores]
+    E --> H[Logs and exports]
 ```
 
-## System Architecture
+## Repository Contents
 
-StoreMax employs a modular, agent-based architecture designed for scalability and flexibility. The system consists of multiple components working together to provide a comprehensive warehouse management solution.
+This repository contains project documentation rather than runnable application source.
 
-### Key Components
-
-- **Frontend Application**: User interface for warehouse operations and monitoring
-- **Agent System**: Modular agents handling specific warehouse functions
-- **Integration Layer**: Connects various system components
-- **Monitoring System**: Tracks performance and provides insights
-
-## Getting Started
-
-### Prerequisites
-
-- Node.js (v16 or higher)
-- Python (v3.10 or higher)
-- npm or yarn
-- Git
-
-### Installation
-
-1. **Clone the repository**
-   ```bash
-   git clone <repository-url>
-   cd StoreMax
-   ```
-
-2. **Install frontend dependencies**
-   ```bash
-   cd frontend
-   npm install
-   ```
-
-3. **Install backend dependencies**
-   ```bash
-   cd ../agents
-   pip install -r requirements.txt
-   ```
-
-### Running the Application
-
-1. **Start the frontend development server**
-   ```bash
-   cd frontend
-   npm run dev
-   ```
-
-2. **Start the backend agents**
-   ```bash
-   # In separate terminals
-   python agents/optimizer/main.py
-   python agents/sync_agent/main.py
-   python agents/warehouse_manager/main.py
-   ```
-
-3. **Access the application**
-   Open your browser and navigate to `http://localhost:5173`
+| Document | Contents |
+| --- | --- |
+| [Architecture overview](docs/architecture-overview.md) | Original system design covering the interface, agents, integration layer, and data services |
+| [AgentField implementation](docs/agentfield-implementation.md) | Agent responsibilities, communication patterns, and implementation lessons |
+| [Cloudflare architecture](docs/cloudflare-workers.md) | Original edge and container deployment design |
+| [Getting started notes](docs/getting-started.md) | Environment and deployment notes for the original implementation; referenced source is not included here |
 
 ## License
 
-StoreMax is open source software licensed under the [MIT License](LICENSE).
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## Acknowledgments
-
-- Built with modern web technologies and best practices
-- Inspired by the need for efficient warehouse management solutions
-- Developed as part of the AgentField Hackathon
+StoreMax documentation is available under the [MIT License](LICENSE).
