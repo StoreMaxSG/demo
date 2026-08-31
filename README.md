@@ -1,5 +1,10 @@
 # StoreMax
 
+<!-- portfolio-status -->
+## Project Status
+
+StoreMax is preserved as a hackathon case study. The original managed Cloudflare deployment has been retired. The architecture describes the event implementation; the repository remains useful for reviewing the agents, optimization logic, and local setup.
+
 A modern warehouse management system designed to optimize storage, streamline operations, and enhance overall warehouse efficiency. StoreMax provides a comprehensive solution for managing warehouse operations with a focus on simplicity and functionality.
 
 ## Project Overview
